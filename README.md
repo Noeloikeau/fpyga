@@ -1,5 +1,5 @@
 # Introduction
-> The `fpyga` Python package simplifies workflow with Intel FPGAs. It can automatically generate verilog, control location assignments, compile, program, read/write to memory, handle multiple FPGAs connected simultaneously, and archive projects all from within Python or Jupyter notebooks. See the docs with examples at https://noeloikeau.github.io/fpyga/.
+> The `fpyga` Python package simplifies workflow with Intel FPGAs. It can automatically generate verilog, control location assignments, compile, program, read/write to memory, handle multiple FPGAs connected simultaneously, and archive projects all from within Python or Jupyter notebooks. See the docs with examples at https://noeloikeau.github.io/fpyga/. Memory interfacing using `quartustcl` https://pypi.org/project/quartustcl/.
 
 
 ## Installation

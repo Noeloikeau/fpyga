@@ -3,13 +3,17 @@
 __all__ = ['Project']
 
 # Cell
-import sidis
-import mif
-import quartustcl
-import numpy as np
-import os
-from fpyga import *
-from typing import Optional, Tuple, Dict, Callable, Union
+import warnings
+with warnings.catch_warnings(): #ignore warnings
+    warnings.simplefilter("ignore")
+    import sidis
+    import mif
+    import quartustcl
+    import numpy as np
+    import os
+    from .devices import *
+    from .scripting import *
+    from typing import Optional, Tuple, Dict, Callable, Union
 
 # Cell
 class Project:

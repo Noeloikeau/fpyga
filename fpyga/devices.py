@@ -3,8 +3,11 @@
 __all__ = ['DE10Class', 'DE10']
 
 # Cell
-import numpy as np
-from typing import Optional, Tuple, Dict, Callable, Union
+import warnings
+with warnings.catch_warnings(): #ignore warnings
+    warnings.simplefilter("ignore")
+    import numpy as np
+    from typing import Optional, Tuple, Dict, Callable, Union
 
 # Cell
 class DE10Class:
