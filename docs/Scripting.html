@@ -60,7 +60,7 @@ nb_path: "01_Scripting.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="qshell" class="doc_header"><code>qshell</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L321" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>qshell</code>(<strong><code>func</code></strong>)</p>
+<h4 id="qshell" class="doc_header"><code>qshell</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>qshell</code>(<strong><code>func</code></strong>)</p>
 </blockquote>
 <p>Function decorator that opens quartustcl shell if none open.</p>
 
@@ -92,7 +92,7 @@ nb_path: "01_Scripting.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_fpgas" class="doc_header"><code>get_fpgas</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L334" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fpgas</code>(<strong><code>q</code></strong>:<code>Optional</code>[<code>QuartusTcl</code>]=<em><code>None</code></em>, <strong><code>parse</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="get_fpgas" class="doc_header"><code>get_fpgas</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fpgas</code>(<strong><code>q</code></strong>:<code>Optional</code>[<code>QuartusTcl</code>]=<em><code>None</code></em>, <strong><code>parse</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Get all connected FPGAs and SOCs as lists of hardware names <code>hwnames</code> and device names <code>devnames</code>.
 Uses <code>q</code> shell if given, otherwise opens new shell. If <code>parse</code>, extracts only the FPGA, ignoring SoCs.
@@ -111,28 +111,6 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">get_fpgas</span><span class="p">(</span><span class="n">q</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">quartustcl</span><span class="o">.</span><span class="n">QuartusTcl</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-             <span class="n">parse</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>            
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Get all connected FPGAs and SOCs as lists of hardware names `hwnames` and device names `devnames`.</span>
-<span class="sd">    Uses `q` shell if given, otherwise opens new shell. If `parse`, extracts only the FPGA, ignoring SoCs.</span>
-<span class="sd">    Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPGA/SOC).</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">hwnames</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get_hardware_names</span><span class="p">())</span>
-    <span class="n">devnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">get_device_names</span><span class="p">(</span><span class="n">hardware_name</span><span class="o">=</span><span class="n">h</span><span class="p">))</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hwnames</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">parse</span><span class="p">:</span>
-        <span class="n">devnames</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devnames</span><span class="p">]</span> <span class="c1">#SoC is always first, if it exists</span>
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">hwnames</span><span class="p">,</span><span class="n">devnames</span><span class="p">)))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -218,7 +196,7 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_insts" class="doc_header"><code>get_insts</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L349" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_insts</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>N_levels</code></strong>=<em><code>2</code></em>, <strong><code>hwnames</code></strong>=<em><code>None</code></em>, <strong><code>devnames</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="get_insts" class="doc_header"><code>get_insts</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_insts</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>N_levels</code></strong>=<em><code>2</code></em>, <strong><code>hwnames</code></strong>=<em><code>None</code></em>, <strong><code>devnames</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Get all memory instances from <code>hwname</code> and <code>devname</code>. See <code>QuartusTcl</code> doc for <code>N_levels</code>.</p>
 
@@ -235,34 +213,6 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">get_insts</span><span class="p">(</span><span class="n">q</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-              <span class="n">N_levels</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-              <span class="n">hwnames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-              <span class="n">devnames</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Get all memory instances from `hwname` and `devname`. See `QuartusTcl` doc for `N_levels`.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">hwnames</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">devnames</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">device_dict</span><span class="o">=</span><span class="n">get_fpgas</span><span class="p">(</span><span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">hwnames</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">device_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">devnames</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">device_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-    <span class="s1">&#39;Finds instance index given a name `inst_name` (string).&#39;</span>
-    <span class="n">memories</span><span class="o">=</span><span class="p">{}</span>
-    <span class="k">for</span> <span class="n">hwname</span><span class="p">,</span><span class="n">devname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hwnames</span><span class="p">,</span><span class="n">devnames</span><span class="p">):</span>
-        <span class="n">memories_raw</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get_editable_mem_instances</span><span class="p">(</span><span class="n">hardware_name</span><span class="o">=</span><span class="n">hwname</span><span class="p">,</span>\
-            <span class="n">device_name</span><span class="o">=</span><span class="n">devname</span><span class="p">)</span>
-        <span class="n">memories</span><span class="p">[</span><span class="n">hwname</span><span class="p">]</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">memories_raw</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">N_levels</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">memories</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -327,7 +277,7 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="begin_mem" class="doc_header"><code>begin_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L370" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>begin_mem</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>)</p>
+<h4 id="begin_mem" class="doc_header"><code>begin_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>begin_mem</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>)</p>
 </blockquote>
 <p>Open a memory edit. If one is already open, pass.</p>
 
@@ -352,7 +302,7 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="end_mem" class="doc_header"><code>end_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L381" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>end_mem</code>(<strong><code>q</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="end_mem" class="doc_header"><code>end_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>end_mem</code>(<strong><code>q</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>End a memory edit. If there are none open, pass.</p>
 
@@ -390,7 +340,7 @@ Returns a dict keyed by hardware port (e.g USB) and valued with devices (e.g FPG
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read" class="doc_header"><code>read</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L391" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>inst</code></strong>=<em><code>0</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>, <strong><code>fname</code></strong>=<em><code>None</code></em>, <strong><code>delete_mif</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="read" class="doc_header"><code>read</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>inst</code></strong>=<em><code>0</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>, <strong><code>fname</code></strong>=<em><code>None</code></em>, <strong><code>delete_mif</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Reads memory from an instance <code>inst</code> into an array <code>data</code>.
 Option <code>delete_mif</code> will delete temporary .mif file if set to <code>True</code>.</p>
@@ -408,41 +358,6 @@ Option <code>delete_mif</code> will delete temporary .mif file if set to <code>T
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-         <span class="n">inst</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-         <span class="n">hw</span><span class="o">=</span><span class="s1">&#39;DE-SoC [USB-1]&#39;</span><span class="p">,</span>
-         <span class="n">dev</span><span class="o">=</span><span class="s1">&#39;@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)&#39;</span><span class="p">,</span>
-         <span class="n">begin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-         <span class="n">end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-         <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-         <span class="n">delete_mif</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Reads memory from an instance `inst` into an array `data`.</span>
-<span class="sd">    Option `delete_mif` will delete temporary .mif file if set to `True`.&#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">begin</span><span class="p">:</span>
-        <span class="n">begin_mem</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">hw</span><span class="o">=</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="n">dev</span><span class="p">)</span>
-    <span class="n">fname</span><span class="o">=</span><span class="n">fname</span> <span class="ow">or</span> <span class="s1">&#39;read_inst</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
-    <span class="n">q</span><span class="o">.</span><span class="n">save_content_from_memory_to_file</span><span class="p">(</span>
-        <span class="n">instance_index</span><span class="o">=</span><span class="n">inst</span><span class="p">,</span>
-        <span class="n">mem_file_path</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span>
-        <span class="n">mem_file_type</span><span class="o">=</span><span class="s1">&#39;mif&#39;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">mif</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">delete_mif</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
-        <span class="n">end_mem</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -491,7 +406,7 @@ Option <code>delete_mif</code> will delete temporary .mif file if set to <code>T
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="format_mem" class="doc_header"><code>format_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L419" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_mem</code>(<strong><code>data</code></strong>, <strong><code>bits</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="format_mem" class="doc_header"><code>format_mem</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_mem</code>(<strong><code>data</code></strong>, <strong><code>bits</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Format input data to nested array required for memory</p>
 
@@ -622,7 +537,7 @@ Option <code>delete_mif</code> will delete temporary .mif file if set to <code>T
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write" class="doc_header"><code>write</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L431" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>inst</code></strong>=<em><code>0</code></em>, <strong><code>data</code></strong>=<em><code>1</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>bits</code></strong>=<em><code>None</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>, <strong><code>fname</code></strong>=<em><code>None</code></em>, <strong><code>delete_mif</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="write" class="doc_header"><code>write</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L131" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>inst</code></strong>=<em><code>0</code></em>, <strong><code>data</code></strong>=<em><code>1</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>bits</code></strong>=<em><code>None</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>, <strong><code>fname</code></strong>=<em><code>None</code></em>, <strong><code>delete_mif</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Writes <code>data</code> array to memory instance <code>inst</code>.
 Option <code>delete_mif</code> will delete temporary .mif file if set to <code>True</code>.</p>
@@ -640,43 +555,6 @@ Option <code>delete_mif</code> will delete temporary .mif file if set to <code>T
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-          <span class="n">inst</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-          <span class="n">data</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-          <span class="n">hw</span><span class="o">=</span><span class="s1">&#39;DE-SoC [USB-1]&#39;</span><span class="p">,</span>
-          <span class="n">dev</span><span class="o">=</span><span class="s1">&#39;@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)&#39;</span><span class="p">,</span>
-          <span class="n">bits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-          <span class="n">begin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-          <span class="n">end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-          <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-          <span class="n">delete_mif</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Writes `data` array to memory instance `inst`.</span>
-<span class="sd">    Option `delete_mif` will delete temporary .mif file if set to `True`.&#39;&#39;&#39;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">format_mem</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
-    <span class="n">fname</span><span class="o">=</span><span class="n">fname</span> <span class="ow">or</span> <span class="s1">&#39;write_inst</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">begin</span><span class="p">:</span>
-        <span class="n">begin_mem</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">mif</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">q</span><span class="o">.</span><span class="n">update_content_to_memory_from_file</span><span class="p">(</span>
-        <span class="n">instance_index</span><span class="o">=</span><span class="n">inst</span><span class="p">,</span>
-        <span class="n">mem_file_path</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span>
-        <span class="n">mem_file_type</span><span class="o">=</span><span class="s1">&#39;mif&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
-        <span class="n">end_mem</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">delete_mif</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -726,7 +604,7 @@ Option <code>delete_mif</code> will delete temporary .mif file if set to <code>T
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_write" class="doc_header"><code>read_write</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L461" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_write</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>args</code></strong>=<em><code>[[0, 'w', 1, 1], [0, 'r']]</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>reps</code></strong>=<em><code>1</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="read_write" class="doc_header"><code>read_write</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_write</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>args</code></strong>=<em><code>[[0, 'w', 1, 1], [0, 'r']]</code></em>, <strong><code>hw</code></strong>=<em><code>'DE-SoC [USB-1]'</code></em>, <strong><code>dev</code></strong>=<em><code>'@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)'</code></em>, <strong><code>reps</code></strong>=<em><code>1</code></em>, <strong><code>begin</code></strong>=<em><code>True</code></em>, <strong><code>end</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Read/write using <code>args</code>, a list of lists/tuples each of the form
 (instance index, 'r' or 'w', data to write if 'w', bits to use if 'w').
@@ -745,52 +623,6 @@ Can repeat operation up to <code>reps</code>.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">read_write</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-              <span class="n">args</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">]],</span>
-              <span class="n">hw</span><span class="o">=</span><span class="s1">&#39;DE-SoC [USB-1]&#39;</span><span class="p">,</span>
-              <span class="n">dev</span><span class="o">=</span><span class="s1">&#39;@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)&#39;</span><span class="p">,</span>
-              <span class="n">reps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-              <span class="n">begin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-              <span class="n">end</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Read/write using `args`, a list of lists/tuples each of the form</span>
-<span class="sd">    (instance index, &#39;r&#39; or &#39;w&#39;, data to write if &#39;w&#39;, bits to use if &#39;w&#39;).</span>
-<span class="sd">    Can repeat operation up to `reps`.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">data</span><span class="o">=</span><span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reps</span><span class="p">)]</span>
-    <span class="k">if</span> <span class="n">begin</span><span class="p">:</span>
-        <span class="n">begin_mem</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">hw</span><span class="o">=</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="n">dev</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reps</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="n">inst</span><span class="o">=</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;r&#39;</span><span class="p">:</span>
-                <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="p">[</span><span class="n">read</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">inst</span><span class="o">=</span><span class="n">inst</span><span class="p">,</span><span class="n">hw</span><span class="o">=</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="n">dev</span><span class="p">,</span><span class="n">begin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
-            <span class="k">elif</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;w&#39;</span><span class="p">:</span>
-                <span class="n">x</span><span class="o">=</span><span class="n">tup</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-                    <span class="n">b</span><span class="o">=</span><span class="kc">None</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">b</span><span class="o">=</span><span class="n">tup</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-                <span class="n">x</span><span class="o">=</span><span class="n">format_mem</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">bits</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
-                <span class="n">write</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">inst</span><span class="o">=</span><span class="n">inst</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">hw</span><span class="o">=</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="n">dev</span><span class="p">,</span><span class="n">begin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
-        <span class="n">end_mem</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">data</span><span class="o">!=</span><span class="p">[]:</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">==</span><span class="p">():</span>
-            <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">data</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -940,7 +772,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_write_all" class="doc_header"><code>read_write_all</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L500" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_write_all</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>args</code></strong>=<em><code>[[0, 'w', 1, 1], [0, 'r']]</code></em>, <strong><code>fpgas</code></strong>=<em><code>[['DE-SoC [USB-1]', '@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)']]</code></em>, <strong><code>reps</code></strong>=<em><code>1</code></em>, <strong><code>begin</code></strong>=<em><code>False</code></em>, <strong><code>end</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="read_write_all" class="doc_header"><code>read_write_all</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L200" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_write_all</code>(<strong><code>q</code></strong>=<em><code>None</code></em>, <strong><code>args</code></strong>=<em><code>[[0, 'w', 1, 1], [0, 'r']]</code></em>, <strong><code>fpgas</code></strong>=<em><code>[['DE-SoC [USB-1]', '@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)']]</code></em>, <strong><code>reps</code></strong>=<em><code>1</code></em>, <strong><code>begin</code></strong>=<em><code>False</code></em>, <strong><code>end</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -956,28 +788,6 @@ Can repeat operation up to <code>reps</code>.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@qshell</span>
-<span class="k">def</span> <span class="nf">read_write_all</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">args</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">]],</span>
-                 <span class="n">fpgas</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;DE-SoC [USB-1]&#39;</span><span class="p">,</span><span class="s1">&#39;@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)&#39;</span><span class="p">]],</span>
-                 <span class="n">reps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                 <span class="n">begin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">end</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="n">data</span><span class="o">=</span><span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fpgas</span><span class="p">))]</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fpgas</span><span class="p">):</span>
-        <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">read_write</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span><span class="n">hw</span><span class="o">=</span><span class="n">hw</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="n">dev</span><span class="p">,</span><span class="n">reps</span><span class="o">=</span><span class="n">reps</span><span class="p">,</span><span class="n">begin</span><span class="o">=</span><span class="n">begin</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">data</span><span class="o">!=</span><span class="p">[]:</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">data</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -1038,7 +848,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="program_proj" class="doc_header"><code>program_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L515" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>program_proj</code>(<strong><code>projectname</code></strong>, <strong><code>hw</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>'output_files'</code></em>)</p>
+<h4 id="program_proj" class="doc_header"><code>program_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>program_proj</code>(<strong><code>projectname</code></strong>, <strong><code>hw</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>'output_files'</code></em>)</p>
 </blockquote>
 <p>Program a single FPGA using a .cdf file.</p>
 
@@ -1070,7 +880,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="compile_proj" class="doc_header"><code>compile_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L529" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compile_proj</code>(<strong><code>projectname</code></strong>)</p>
+<h4 id="compile_proj" class="doc_header"><code>compile_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L229" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>compile_proj</code>(<strong><code>projectname</code></strong>)</p>
 </blockquote>
 <p>Compiles <code>Quartus</code> project <code>projectname</code>.</p>
 
@@ -1102,7 +912,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="archive_proj" class="doc_header"><code>archive_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L534" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>archive_proj</code>(<strong><code>projectname</code></strong>, <strong><code>filename</code></strong>, <strong><code>path</code></strong>=<em><code>''</code></em>)</p>
+<h4 id="archive_proj" class="doc_header"><code>archive_proj</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>archive_proj</code>(<strong><code>projectname</code></strong>, <strong><code>filename</code></strong>, <strong><code>path</code></strong>=<em><code>''</code></em>)</p>
 </blockquote>
 <p>Generates a <code>projectname-date.qar</code> file which Quartus can use to restore all project files.</p>
 
@@ -1140,7 +950,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="back_annotate" class="doc_header"><code>back_annotate</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L541" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>back_annotate</code>(<strong><code>projectname</code></strong>, <strong><code>routing</code></strong>=<em><code>True</code></em>, <strong><code>logic</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="back_annotate" class="doc_header"><code>back_annotate</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L241" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>back_annotate</code>(<strong><code>projectname</code></strong>, <strong><code>routing</code></strong>=<em><code>True</code></em>, <strong><code>logic</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Writes all routing and logic to the qsf file.</p>
 
@@ -1172,7 +982,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_qsf" class="doc_header"><code>write_qsf</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L551" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_qsf</code>(<strong><code>txt</code></strong>=<em><code>''</code></em>, <strong><code>style</code></strong>=<em><code>'w'</code></em>, <strong><code>projectname</code></strong>=<em><code>'DE10'</code></em>, <strong><code>sourcename</code></strong>=<em><code>'qsf_source.qsf'</code></em>, <strong><code>set_source</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="write_qsf" class="doc_header"><code>write_qsf</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L251" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_qsf</code>(<strong><code>txt</code></strong>=<em><code>''</code></em>, <strong><code>style</code></strong>=<em><code>'w'</code></em>, <strong><code>projectname</code></strong>=<em><code>'DE10'</code></em>, <strong><code>sourcename</code></strong>=<em><code>'qsf_source.qsf'</code></em>, <strong><code>set_source</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Writes assignments <code>txt</code> to <code>sourcename</code> and includes them in <code>projectname</code>.qsf.</p>
 
@@ -1210,7 +1020,7 @@ Can repeat operation up to <code>reps</code>.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="lut_mask" class="doc_header"><code>lut_mask</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L565" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lut_mask</code>(<strong><code>lut</code></strong>=<em><code>&lt;lambda&gt;</code></em>, <strong><code>N</code></strong>=<em><code>4</code></em>)</p>
+<h4 id="lut_mask" class="doc_header"><code>lut_mask</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L265" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lut_mask</code>(<strong><code>lut</code></strong>=<em><code>&lt;lambda&gt;</code></em>, <strong><code>N</code></strong>=<em><code>4</code></em>)</p>
 </blockquote>
 <p>Quartus LUT mask for primitive logic cell, takes function to input and returns hex encoding
 in:
@@ -1286,7 +1096,7 @@ out:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="analyze_timing" class="doc_header"><code>analyze_timing</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L584" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>analyze_timing</code>(<strong><code>projectname</code></strong>, <strong><code>_from</code></strong>=<em><code>'[get_clocks {MyClock}]'</code></em>, <strong><code>_to</code></strong>=<em><code>'[get_cells {MyCell}]'</code></em>, <strong><code>detail</code></strong>=<em><code>'summary'</code></em>, <strong><code>filename</code></strong>=<em><code>'timing.txt'</code></em>, <strong><code>npaths</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="analyze_timing" class="doc_header"><code>analyze_timing</code><a href="https://github.com/Noeloikeau/fpyga/tree/master/fpyga/scripting.py#L284" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>analyze_timing</code>(<strong><code>projectname</code></strong>, <strong><code>_from</code></strong>=<em><code>'[get_clocks {MyClock}]'</code></em>, <strong><code>_to</code></strong>=<em><code>'[get_cells {MyCell}]'</code></em>, <strong><code>detail</code></strong>=<em><code>'summary'</code></em>, <strong><code>filename</code></strong>=<em><code>'timing.txt'</code></em>, <strong><code>npaths</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 <p>Runs the timing analyzer, getting path information from <code>_from</code> to <code>_to</code>.
 Gives <code>detail</code> (summary or full_path) on <code>npaths</code> and generates <code>filename</code>.
